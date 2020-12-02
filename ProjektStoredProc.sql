@@ -1,15 +1,19 @@
-DROP PROC beståedeEksamenerForstuderende
+USE School
+
+DROP PROC IF EXISTS PassedExamsForStudent
 
 GO
-CREATE PROC beståedeEksamenerForstuderende
-@studerende_id INT
+CREATE PROC PassedExamsForStudent
+@student_id INT
 AS
 BEGIN
-SELECT e.navn
-FROM eksamen e, eksamensResultat er
-WHERE e.eksamen_id = er.eksamen_id
-AND er.studerende_id = @studerende_id
-AND er.karakter > 0
+SELECT e.exam_name
+FROM Exam e
+INNER JOIN ExamResult er
+ON e.exam_Id = er.exam_Id
+AND er.grade > 0
+AND er.student_id = @student_id
 END
 
-EXEC beståedeEksamenerForstuderende 1
+GO
+EXEC PassedExamsForStudent 1
