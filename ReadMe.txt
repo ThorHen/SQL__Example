@@ -1,0 +1,1 @@
+Disse Query filer er skrevet i MSSQL
